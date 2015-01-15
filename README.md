@@ -8,8 +8,8 @@
 基础
 ---
 
-1. 安装
-2. Hello, World!
+1. [安装](https://github.com/linuxaged/rust_book_zh/blob/master/install.md)
+2. [Hello, World!](https://github.com/linuxaged/rust_book_zh/blob/master/helloword.md)
 3. Hello, Cargo!
 4. 变量绑定
 5. If
