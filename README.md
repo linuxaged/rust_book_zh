@@ -17,7 +17,7 @@
 7. 注释
 8. 复合类型
 9. [模式匹配](https://github.com/linuxaged/rust_book_zh/blob/master/match.md)
-10. 循环
+10. [循环](https://github.com/linuxaged/rust_book_zh/blob/master/loop.md)
 11. [字符窜](https://github.com/linuxaged/rust_book_zh/blob/master/strings.md)
 12. 数组
 13. 标准输入
