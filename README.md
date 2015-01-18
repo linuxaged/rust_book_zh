@@ -1,12 +1,12 @@
 #Rust 编程语言
----
+
 
 你好！这本书旨在为你学习 [Rust](http://www.rust-lang.org/) 编程语言提供一些指导。Rust 是一门专注于安全性和效率的现代系统级编程语言。
 
 《Rust 编程语言》分为三个部分
 
-基础
----
+##基础
+
 
 1. [安装](https://github.com/linuxaged/rust_book_zh/blob/master/install.md)
 2. [Hello, World!](https://github.com/linuxaged/rust_book_zh/blob/master/helloword.md)
@@ -27,8 +27,8 @@
 
 在读完基础部分，你就具备了进阶的基础并且能够写一些简单的程序。
 
-进阶
----
+##进阶
+
 
 1. Crates 和 模块
 2. 测试
@@ -45,8 +45,7 @@
 
 这部分包含独立的章节互不依赖，各自专注于一个主题，你可以按任意次序阅读。
 
-高级
----
+##高级
 
 1. FFI
 2. 危险代码
