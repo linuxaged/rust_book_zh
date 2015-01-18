@@ -35,13 +35,14 @@
 3. [指针](https://github.com/linuxaged/rust_book_zh/blob/master/pointer.md)
 4. Ownership
 5. 模式
-6. 方法
+6. 方法标记
 7. 闭包
 8. 迭代器
 9. 模板
 10. Traits
 11. Tasks
-12. 错误处理
+13. [Thread](https://github.com/linuxaged/rust_book_zh/blob/master/thread.md) 
+12. [错误处理](https://github.com/linuxaged/rust_book_zh/blob/master/errror.md)
 
 这部分包含独立的章节互不依赖，各自专注于一个主题，你可以按任意次序阅读。
 
