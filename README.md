@@ -15,7 +15,7 @@
 5. If
 6. 函数
 7. [注释](https://github.com/linuxaged/rust_book_zh/blob/master/comments.md)
-8. 复合类型
+8. [复合类型](https://github.com/linuxaged/rust_book_zh/blob/master/compound.md)
 9. [模式匹配](https://github.com/linuxaged/rust_book_zh/blob/master/match.md)
 10. [循环](https://github.com/linuxaged/rust_book_zh/blob/master/loop.md)
 11. [字符窜](https://github.com/linuxaged/rust_book_zh/blob/master/strings.md)
@@ -37,9 +37,9 @@
 5. 模式
 6. 方法
 7. 闭包
-8. 迭代器
+8. [迭代器](https://github.com/linuxaged/rust_book_zh/blob/master/iterators.md)
 9. 模板
-10. Traits
+10. [Traits](https://github.com/linuxaged/rust_book_zh/blob/master/traits.md)
 11. Tasks
 12. 错误处理
 
