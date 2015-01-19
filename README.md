@@ -10,18 +10,18 @@
 
 1. [安装](https://github.com/linuxaged/rust_book_zh/blob/master/install.md)
 2. [Hello, World!](https://github.com/linuxaged/rust_book_zh/blob/master/helloword.md)
-3. Hello, Cargo!
-4. 变量绑定
-5. If
-6. 函数
+3. [Hello, Cargo!](https://github.com/linuxaged/rust_book_zh/blob/master/cargo.md)
+4. [变量绑定](https://github.com/linuxaged/rust_book_zh/blob/master/binding.md)
+5. [If](https://github.com/linuxaged/rust_book_zh/blob/master/if.md)
+6. [函数](https://github.com/linuxaged/rust_book_zh/blob/master/functiong.md)
 7. [注释](https://github.com/linuxaged/rust_book_zh/blob/master/comment.md)
 8. [复合类型](https://github.com/linuxaged/rust_book_zh/blob/master/compound.md)
 9. [模式匹配](https://github.com/linuxaged/rust_book_zh/blob/master/match.md)
 10. [循环](https://github.com/linuxaged/rust_book_zh/blob/master/loop.md)
 11. [字符窜](https://github.com/linuxaged/rust_book_zh/blob/master/string.md)
-12. 数组
-13. 标准输入
-14. 猜谜游戏
+12. [数组](https://github.com/linuxaged/rust_book_zh/blob/master/array.md)
+13. [标准输入](https://github.com/linuxaged/rust_book_zh/blob/master/input.md)
+14. [猜谜游戏](https://github.com/linuxaged/rust_book_zh/blob/master/gussgame.md)
 
 这部分介绍 Rust 的句法和语义。每一章节描述一种 Rust 句法，最后总结所有章节完成一个猜谜游戏。
 
@@ -30,15 +30,15 @@
 ##进阶
 
 
-1. Crates 和 模块
-2. 测试
+1. [Crates 和 模块](https://github.com/linuxaged/rust_book_zh/blob/master/crate.md)
+2. [测试](https://github.com/linuxaged/rust_book_zh/blob/master/test.md)
 3. [指针](https://github.com/linuxaged/rust_book_zh/blob/master/pointer.md)
-4. Ownership
-5. 模式
-6. 方法标记
-7. 闭包
+4. [Ownership](https://github.com/linuxaged/rust_book_zh/blob/master/ownership.md)
+5. [模式](https://github.com/linuxaged/rust_book_zh/blob/master/pattern.md)
+6. [方法标记](https://github.com/linuxaged/rust_book_zh/blob/master/method.md)
+7. [闭包](https://github.com/linuxaged/rust_book_zh/blob/master/closure.md)
 8. [迭代器](https://github.com/linuxaged/rust_book_zh/blob/master/iterator.md)
-9. 模板
+9. [模板](https://github.com/linuxaged/rust_book_zh/blob/master/generic.md)
 10. [Traits](https://github.com/linuxaged/rust_book_zh/blob/master/trait.md)
 11. Tasks
 13. [Thread](https://github.com/linuxaged/rust_book_zh/blob/master/thread.md) 
@@ -48,7 +48,7 @@
 
 ##高级
 
-1. FFI
-2. 危险代码
-3. 宏
-4. 编译器插件
+1. [FFI](https://github.com/linuxaged/rust_book_zh/blob/master/ffi.md)
+2. [危险代码](https://github.com/linuxaged/rust_book_zh/blob/master/unsafe.md)
+3. [宏](https://github.com/linuxaged/rust_book_zh/blob/master/macro.md)
+4. [编译器插件](https://github.com/linuxaged/rust_book_zh/blob/master/plugin.md)
