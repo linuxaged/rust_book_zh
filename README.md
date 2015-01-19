@@ -13,7 +13,7 @@
 3. [Hello, Cargo!](https://github.com/linuxaged/rust_book_zh/blob/master/cargo.md)
 4. [变量绑定](https://github.com/linuxaged/rust_book_zh/blob/master/binding.md)
 5. [If](https://github.com/linuxaged/rust_book_zh/blob/master/if.md)
-6. [函数](https://github.com/linuxaged/rust_book_zh/blob/master/functiong.md)
+6. [函数](https://github.com/linuxaged/rust_book_zh/blob/master/function.md)
 7. [注释](https://github.com/linuxaged/rust_book_zh/blob/master/comment.md)
 8. [复合类型](https://github.com/linuxaged/rust_book_zh/blob/master/compound.md)
 9. [模式匹配](https://github.com/linuxaged/rust_book_zh/blob/master/match.md)
