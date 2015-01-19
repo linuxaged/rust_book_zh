@@ -14,11 +14,11 @@
 4. 变量绑定
 5. If
 6. 函数
-7. [注释](https://github.com/linuxaged/rust_book_zh/blob/master/comments.md)
+7. [注释](https://github.com/linuxaged/rust_book_zh/blob/master/comment.md)
 8. [复合类型](https://github.com/linuxaged/rust_book_zh/blob/master/compound.md)
 9. [模式匹配](https://github.com/linuxaged/rust_book_zh/blob/master/match.md)
 10. [循环](https://github.com/linuxaged/rust_book_zh/blob/master/loop.md)
-11. [字符窜](https://github.com/linuxaged/rust_book_zh/blob/master/strings.md)
+11. [字符窜](https://github.com/linuxaged/rust_book_zh/blob/master/string.md)
 12. 数组
 13. 标准输入
 14. 猜谜游戏
@@ -37,9 +37,9 @@
 5. 模式
 6. 方法标记
 7. 闭包
-8. [迭代器](https://github.com/linuxaged/rust_book_zh/blob/master/iterators.md)
+8. [迭代器](https://github.com/linuxaged/rust_book_zh/blob/master/iterator.md)
 9. 模板
-10. [Traits](https://github.com/linuxaged/rust_book_zh/blob/master/traits.md)
+10. [Traits](https://github.com/linuxaged/rust_book_zh/blob/master/trait.md)
 11. Tasks
 13. [Thread](https://github.com/linuxaged/rust_book_zh/blob/master/thread.md) 
 12. [错误处理](https://github.com/linuxaged/rust_book_zh/blob/master/errror.md)
