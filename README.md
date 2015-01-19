@@ -18,7 +18,7 @@
 8. [复合类型](https://github.com/linuxaged/rust_book_zh/blob/master/compound.md)
 9. [模式匹配](https://github.com/linuxaged/rust_book_zh/blob/master/match.md)
 10. [循环](https://github.com/linuxaged/rust_book_zh/blob/master/loop.md)
-11. [字符窜](https://github.com/linuxaged/rust_book_zh/blob/master/string.md)
+11. [字符串](https://github.com/linuxaged/rust_book_zh/blob/master/string.md)
 12. [数组](https://github.com/linuxaged/rust_book_zh/blob/master/array.md)
 13. [标准输入](https://github.com/linuxaged/rust_book_zh/blob/master/input.md)
 14. [猜谜游戏](https://github.com/linuxaged/rust_book_zh/blob/master/gussgame.md)
