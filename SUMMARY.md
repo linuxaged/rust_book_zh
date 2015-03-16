@@ -1,6 +1,5 @@
 #Rust 编程语言
 
-
 你好！这本书旨在为你学习 [Rust](http://www.rust-lang.org/) 编程语言提供一些指导。Rust 是一门专注于安全性和效率的现代系统级编程语言。
 
 《Rust 编程语言》分为以下几个部分
@@ -20,9 +19,7 @@
     * [字符串](basic/string.md)
     * [数组](basic/array.md)
     * [标准输入](basic/input.md)
-    * [猜谜游戏](basic/gussgame.md)
-
-
+    * [猜谜游戏](basic/guessgame.md)
 * [进阶](intermediate/README.md)
 	* [Crates 和 模块](intermediate/crate.md)
 	* [测试](intermediate/test.md)
@@ -38,16 +35,12 @@
 	* [Dispatch](intermediate/dispatch.md)
 	* [宏](intermediate/macro.md)
 	* [并行](intermediate/concurrency.md)
-	* [错误处理](intermediate/errror.md)
+	* [错误处理](intermediate/error.md)
 	* [文档](intermediate/document.md)
-
-
-
 * [高级](advance/README.md)
 	* [FFI](advance/ffi.md)
 	* [危险代码](advance/unsafe.md)
 	* [宏-高级用法](advance/macro.md)
 	* [编译器插件](advance/plugin.md)
-
 * [总结](conclusion.md)
 * [术语表](glossary.md)
