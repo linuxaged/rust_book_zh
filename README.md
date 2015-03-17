@@ -1,5 +1,11 @@
 #[《Rust 编程语言》](SUMMARY.md)
 
+##安装 gitbook
+
+	brew update
+	brew install npm
+	npm install gitbook -g
+
 ##生成 PDF
 
     gitbook pdf . ./rust_book.pdf
