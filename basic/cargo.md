@@ -1,4 +1,4 @@
-Cargo 负责三件事：编译你的代码；下载你代码中的依赖；编译这些依赖。
+Cargo 负责三件事：下载你代码中的依赖；编译这些依赖；最后编译你的代码。
 
 如果你是通过官方的安装器来安装的 Rust ，那么同时你会安装好 Cargo。如果你用别的方法安装的请参考 Cargo 的 README 来安装。
 
@@ -31,8 +31,18 @@ Cargo 默认的源文件路径为 src 目录，他和 README　和 license 都�
 
 TOML 类似于 INI，但相比有些优点。
 
+这个文件里定义了两个 table，一个叫做 package 一个叫做 bin，package 告诉 Cargo 你的工程的一些基本信息。bin 告诉 Cargo 我这是一个可执行程序工程不是一个库工程。
+
+接下来你就可以编译了：
+
+	$ cargo build
+	   Compiling hello_world v0.0.1 (file:///home/yourname/projects/hello_world)
+	$ ./target/debug/hello_world
+	Hello, world!
+
+不管多大的项目你都可以用 cargo build 命令来完成编译，当你觉得程序足够稳定可以发布时，用 cargo build --release 可以用
 	
-你可能注意到 Cargo 为我们创建了一个叫做 Cargo.lock 的文件：
+你可能注意到 Cargo 还为我们创建了一个叫做 Cargo.lock 的文件：
 
 	[root]
 	name = "hello_world"
