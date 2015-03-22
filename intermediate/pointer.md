@@ -12,7 +12,7 @@ Rust 指针是其众多特性中格外引人注目的一个，当然，也格外
 
 	let x = 5i;
 	let y = 8i;
-	
+
 |  location | value  |
 |-----------|--------|
 |  0xd3e030 |  5     |
@@ -25,8 +25,8 @@ Rust 指针是其众多特性中格外引人注目的一个，当然，也格外
 	let x = 5i;
 	let y = 8i;
 	let z = &y;
-	
-	
+
+
 |  location | value  |
 |-----------|--------|
 |  0xd3e030 |  5     |
@@ -36,13 +36,13 @@ Rust 指针是其众多特性中格外引人注目的一个，当然，也格外
 看到不同之处了吗？区别于直接保存值，指针保存的是一个内存的一个地址，在这里 z 保存的是 y 的地址。x , y 是 int 型，而 z 是 &int 型。我们可以用 `{:p}` 打印地址：
 
 	println!("{:p}",z);
-	
+
 这会打印 0xd3e028.
 
 因为 int 和 &int 是不同的类型，我们不能将它们相加：
 
 	println!("{}", x + z)
-	
+
 这会报错：
 
 	hello.rs:6:24: 6:25 error: mismatched types: expected `int` but found `&int` (expected int 	but found &-ptr)
@@ -53,9 +53,9 @@ Rust 指针是其众多特性中格外引人注目的一个，当然，也格外
 	let x = 5i;
 	let y = 8i;
 	let z = &y;
-	
+
 	print!("{}", x + *z);
-	
+
 打印出 13.
 
 好了，总结一下，指针就是指向某个内存地址。我们讨论完了什么是指针，接下来看一下为什么会有指针。
@@ -111,8 +111,27 @@ x 是 make_pointer 函数的局部变量，在函数返回后立即失效（被�
 
   		// what is the value of x here?
 	}
-	
+
 这里的 run_in_new_thread 创建一个新线程，在新线程里调用 mutate 函数并传入参数。我们这有两个线程，它们都通过 metate 函数操作 x 的引用，我们不能确定哪个线程先完成，x 的值也就不确定了。还可能有更糟的情况，如果有一个引用指向了非法地址，我们就会像前面说到的那样的对一个非法地址进行操作，后果变得无法预料。
+
+#Boxes
+
+`Box<T>` 表示一个装箱指针（boxes pointer 在堆上分配数据返回指针）：
+
+	let x = Box::new(5);
+
+虽然是在堆上分配，但是离开作用域后被自动释放：
+
+	{
+	    let x = Box::new(5);
+
+	    // stuff happens
+
+	} // 在这被释放
+
+box 并没有像其他语言里那样使用析构函数或者垃圾回收。Box 实际上是一个仿射类型(affine type)。也就是说编译器会检测 Box 的作用域范围，然后插入响应的代码。更进一步， Box 事实上是一种特殊的仿射类型叫做 [region](http://www.cs.umd.edu/projects/cyclone/papers/cyclone-regions.pdf)。
+
+
 
 ##总结
 
@@ -160,7 +179,7 @@ x 是 make_pointer 函数的局部变量，在函数返回后立即失效（被�
 	*y = 5; // error: cannot assign to immutable borrowed content `*y`
 
 同样：
-	
+
 	let x = 5;
 	let y = &mut x; // error: cannot borrow immutable local variable `x` as mutable
 
