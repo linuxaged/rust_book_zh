@@ -97,3 +97,17 @@ Rust 还有一种复合数据类型叫做 tuple struct, 它自己有名字但是
 这相当于给 i32 起了个别名，同时也创建一个新类型叫 Inches
 
 #enum
+最后就是 Rust 里非常重要的枚举类型，enum 在标准库里被大量使用。和其他语言一样 enum 表示“从成员类型中选一种”。下面的例子定义了一个字符类型，它可能是数字或者别的（字母或者符号），但是不可能又是数字又是别的（字母或符号）。
+
+	enum Character {
+	    Digit(i32),
+	    Other,
+	}
+
+enum 里面的成员可以是任何类型，下面的类型都可以往 enum 里放：
+
+	struct Empty;
+	struct Color(i32, i32, i32);
+	struct Length(i32);
+	struct Status { Health: i32, Mana: i32, Attack: i32, Defense: i32 }
+	struct HeightDatabase(Vec<i32>);
