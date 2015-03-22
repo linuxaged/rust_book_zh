@@ -48,14 +48,52 @@ tuple 另外一个非常重要的功能，当我们的函数需要返回多个�
 
 struct 是比 tuple 更常见更通用的类型，他们的区别在于 struct 有名字 tuple 没有：
 
+	let black = (255,255,255); // tuple
+
+	struct Color(i32, i32, i32);
+	let black = Color(255,255,255); // struct
+
+
+
+这里 black != origin
+
+#tuple struct
+
+Rust 还有一种复合数据类型叫做 tuple struct, 它自己有名字但是成员没有名字：
+
 	struct Color(i32, i32, i32);
 	struct Point(i32, i32, i32);
 
-不同的名字代表不同的类型，即使他们里面的数据都一样：
+这里要注意，不同的名字代表不同的类型，即使他们里面的数据都一样：
 
 	let black = Color(0, 0, 0);
 	let origin = Point(0, 0, 0);
 
-这里 black != origin
+绝大多数情况下你应该使用 struct 而不是 tuple struct。通常我们把 Color 和 Point 写作：
+
+	struct Color {
+	    red: i32,
+	    blue: i32,
+	    green: i32,
+	}
+
+	struct Point {
+	    x: i32,
+	    y: i32,
+	    z: i32,
+	}
+
+用名称将成员区别开来有利于减少错误发生。
+
+但是有一种 tuple struct 非常有用，就是只包含一个数据成员的 tuple struct:
+
+	struct Inches(i32);
+
+	let length = Inches(10);
+
+	let Inches(integer_length) = length;
+	println!("length is {} inches", integer_length);
+
+这相当于给 i32 起了个别名，同时也创建一个新类型叫 Inches
 
 #enum
