@@ -197,6 +197,23 @@ box 并没有像其他语言里那样使用析构函数或者垃圾回收。Box 
 
 因为提供了这些安全检查，在运行时引用和传统的之中呢并没有区别。这些安全检查都是在编译期进行的，所以没有任何额外的运行时开销。这种原理叫做 region pointers -- 逐渐进化成了我们现在的*生命周期*。
 
+#模式和 ref
+
+当你对指针指向的内容进行匹配的时候，直接匹配并不是最好选择，
+
+	fn possibly_print(x: &Option<String>) {
+	    match *x {
+	        // BAD: cannot move out of a `&`
+	        Some(s) => println!("{}", s)
+
+	        // GOOD: instead take a reference into the memory of the `Option`
+	        Some(ref s) => println!("{}", *s),
+	        None => {}
+	    }
+	}
+
+这里 `ref s` 表示一个 &String 类型，而不是 String。这在你只是想引用一个对象而不是完全占有的时候很有用。
+
 ##速查表
 
 这儿有个所有 Rust 指针类型的概述
@@ -210,3 +227,11 @@ box 并没有像其他语言里那样使用析构函数或者垃圾回收。Box 
 |`Arc<T>`	|线程安全的引用计数指针	|同上但是线程安全							|
 |`*const T`	|裸指针				|读 T 是危险的							|
 |`*mut T`	|可变裸指针			|读写 T 是危险的							|
+
+#相关资源
+
+	* [Box API 文档]()
+
+	* [所有权系统指南]()
+
+	* [Cyclone paper on regions]()
