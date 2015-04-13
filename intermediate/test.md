@@ -1,3 +1,5 @@
+% 测试
+
 大多数程序员都不重视测试，我们先聆听一下 Dijkstra 的教诲：
 
     Program testing can be a very effective way to show the presence of bugs, but it is hopelessly inadequate for showing their absence.

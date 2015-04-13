@@ -1,4 +1,4 @@
-#Trait Objects
+% Trait Objects
 
 当涉及到多态的时候，有一种判断到底应该调用哪个版本的机制，这种机制叫做调度（dispatch）。有两种调度，静态调度和动态调度。Rust 更倾向于使用静态调度，但是也支持动态调度；动态调度是通过 trait objects 来实现的。
 

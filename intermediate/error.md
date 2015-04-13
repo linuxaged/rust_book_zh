@@ -1,10 +1,10 @@
-#错误处理
+% 错误处理
 
 墨菲定律告诉我们只要有可能出错就一定会出错。对不可避免的事情有所规划是非常重要的。Rust 内置了各种错误处理机制。
 
 程序出错主要分两种：failtures, panics。我们先说它们的不同点，然后再来讨论它们分别应该如何处理。最后讨论何如把 failtures 升级为 panics。
 
-##Failture vs. Panic
+#Failture vs. Panic
 
 Rust 用两个专有名词来区分两种形式错误：failture 和 panic。failture 是指能够以某种方式恢复的错误。panic 是指无法恢复的错误。
 

@@ -1,5 +1,5 @@
-安装 Rust
----
+% 安装 Rust
+
 使用 Rust 的第一步当然是安装了！你又多种选择来安装 Rust，其中最简单的是使用 `rustup` 脚本。如果你用的 Linux 或者 Mac 只需要在命令行下输入以下命令：
 
 	$ curl -L https://static.rust-lang.org/rustup.sh | sudo sh

@@ -1,3 +1,5 @@
+% Trait
+
 回顾一下我们是怎么实现方法的：
 
 	struct Circle {

@@ -1,4 +1,4 @@
-#模式（Patterns）
+% 模式（Patterns）
 
 我们前面讲到的 `let` 和 `match` 其实已经用到了模式。这个现在我们看一下 `match` 的一些高级用法。
 
@@ -72,7 +72,7 @@
 	    OptionalInt::Missing => println!("No such luck."),
 	}
 
-##指针和引用的匹配
+#指针和引用的匹配
 
 当你 match 指针类型的时候，应该加上 & 符号：
 
@@ -98,7 +98,7 @@
 	    ref mut mr => println!("Got a mutable reference to {}", mr),
 	}
 
-##匹配 struct 成员
+#匹配 struct 成员
 
 甚至你还可以对 struct 里面的成员进行匹配：
 
@@ -126,7 +126,7 @@
 	    Point { x: x, .. } => println!("x is {}", x),
 	}
 
-##匹配数组和切片
+#匹配数组和切片
 
 如果你需要匹配切片或者数组的话，就要用 `&`:
 
