@@ -5,7 +5,7 @@
 
 Rust 在并发的时候也能够保证内存安全。
 
-在开始讨论并发之前首先要明确 Rust 已足够底层，所有的这些都是由标准库提供的。也就是说，如果对 Rust 提供的并发不满意，你可以自己去实现。[mio](https://github.com/carllerche/mio) 就是一个例子。
+在开始讨论并发之前首先要明确 Rust 提供了最基本的元素，然后并发是在这些基本元素上实现的。也就是说，如果对 Rust 提供的并发不满意，你可以自己去实现。[mio](https://github.com/carllerche/mio) 就是一个例子。
 
 ##Send , Sync
 

@@ -57,17 +57,17 @@ Trait Objects
 
 这种实现的优势在于方法调用可以内联，效率更高；弊端在于，如果有非常多版本的方法，二进制代码的体积会迅速膨胀，因为编译器替每个版本的 trait 实现都生成了一个函数。
 
-另外值得注意的是编译器并不完美，它可能把代码优化得变慢了。比如过多的使用内联函数会阻塞指令缓存（instruction cache），因此你应该小心使用`#[incline]` 和 `#[inline(always)]`。同样的原因，动态调度有可能比静态调度快。
+另外值得注意的是编译器并不完美，它可能把代码优化得变慢了。比如过多的使用内联函数会阻塞指令缓存（instruction cache），因此你应该小心使用`#[incline]` 和 `#[inline(always)]`。同样的原因，静态调度是有可能比动态调度慢的。
 
 ##动态调度
 
-Rust 通过一种叫做 trait objects 的特性来实现动态调度。像 `&Foo` ，`Box<Foo>` 这样的 trait object 包含了一个实现了 Foo trait 的对象。这个对象的类型具体什么类型只有在运行时才知道。
+Rust 通过 trait objects 来实现动态调度。像 `&Foo` ，`Box<Foo>` 这样的 trait object 包含了一个实现了 Foo trait 的对象。这个对象的类型具体什么类型只有在运行时才知道。
 
-trait object 可以通过转化一个指向实现了特定 trait 的对象的指针来获得，比如 `&x as &Foo`； 或者是强制转换，比如一个以 &Foo 为参数的函数，你调用时候传入 `&x` , 编译器会把 &x 转换成 trait object。这些转换同样适用于可变类型的指针，例如把 `&mut T` 转换到 `&mut Foo` 也适用于 Box 类型，比如把 `Box<T>` 转换到 `Box<Foo>`。
+trait object 可以通过转化指针来获得，但这个指针指向的对象必须实现了相关的 trait。比如 `&x as &Foo`； 或者是强制转换，比如一个以 &Foo 为参数的函数，你调用时候传入 `&x` （注意！这里是引用，和前面的静态调度不一样）, 编译器会把 &x 转换成 trait object。这些转换同样适用于可变类型的指针，例如把 `&mut T` 转换到 `&mut Foo` 也适用于 Box 类型，比如把 `Box<T>` 转换到 `Box<Foo>`。
 
-这些转换实际上是消除了编译器对指针类型的记录，trait object 因此也叫做“类型消除”。
+这些转换的实际作用是消除编译器对指针类型的记录，trait object 因此也叫做“类型消除”。
 
-回到上面的例子，我们可以用转换 trait object 的方法来实现动态调度：
+回到上面的例子，我们尝试用把指针转换到 trait object 的方法来实现动态调度：
 
 	fn do_something(x: &Foo) {
 	    x.method();
@@ -76,26 +76,28 @@ trait object 可以通过转化一个指向实现了特定 trait 的对象的指
 	fn main() {
 	    let x = 5u8;
 	    do_something(&x as &Foo);
-	}
+	    // 或者
+	    // do_something(&x);
 
-或者是强制转换：
-
-	fn do_something(x: &Foo) {
-	    x.method();
-	}
-
-	fn main() {
-	    let x = "Hello".to_string();
-	    do_something(&x);
+	    let y = "test".ToString();
+	    do_something(&y as &Foo);
+	    // 或者
+	    // do_something(&y);
 	}
 
 以 trait object 为参数的函数只有一个，并不会像静态调度那样生成多个版本。和静态调度相比避免了代码的膨胀，但是引入了虚函数调用的开销而且编译器也很难对这类函数进行内联等相关的优化。
 
-#为什么用指针？
+##为什么用指针？
 
-#trait object 的表示
+和其他语言不一样，Rust 并没有默认使用指针来表示一些类型。在 rust 里不同类型有着不同的长度，这个长度信息在参数传递和把他从栈上移到堆上是非常重要的。
 
-trait 的所有方法可以通过 trait object 里面一个叫做 vtable 的指针来调用。（vtable 由编译器创建和管理）
+但在这里，我们需要一个对象既能装下 `String` 又能装下 `u8`，不用指针是很难办到的，除非这个对象非常非常大，但是这么做很浪费。
+
+把对象放在指针后面意味着我们不需要关心对象的大小了，只要关心指针本身的大小。
+
+##[trait object 的表示](http://programmers.stackexchange.com/a/247313/79822)
+
+trait 的所有方法可以通过 trait object 里面一个 vtable 类型的指针来调用。（vtable 由编译器创建和管理）
 
 trait object 说简单也简单说复杂也复杂，他核心的数据结构和布局很直接，但是有一些很奇怪的出错信息和行为。
 
@@ -108,9 +110,9 @@ trait object 说简单也简单说复杂也复杂，他核心的数据结构和�
 
 也就是说一个 trait object 包含了 data 指针和 vtable 指针。
 
-data 指针指向 trait object 里保存的数据， vtable 指针指向 T 类型的 Foo 的实现对应的 vtable。
+data 指针指向 trait object 里保存的数据， vtable 指针指向了实现了 Foo Trait 的类型的 vtable。
 
-vtable 是一个包含了若干个函数指针的 struct 结构体，这些函数指针指向实现了的 trait 方法。一个像 trait_object.method() 这样的方法调用会从 vtable 里获取一个对应的指针然后动态调用它：
+vtable 是一个包含了若干个函数指针的结构体，这些函数指针指向该类型实现的 trait 方法。一个像 trait_object.method() 这样的方法调用会从 vtable 里获取一个对应的指针然后动态调用它：
 
 	struct FooVtable {
 	    destructor: fn(*mut ()),
