@@ -85,7 +85,7 @@ trait object 可以通过转化指针来获得，但这个指针指向的对象�
 	    // do_something(&y);
 	}
 
-以 trait object 为参数的函数只有一个，并不会像静态调度那样生成多个版本。和静态调度相比避免了代码的膨胀，但是引入了虚函数调用的开销而且编译器也很难对这类函数进行内联等相关的优化。
+以 trait object 为参数的函数只有一份，并不会像静态调度那样生成多个版本的函数。和静态调度相比避免了代码的膨胀，但是引入了虚函数调用的开销而且编译器也很难对这类函数进行内联等相关的优化。
 
 ##为什么用指针？
 
@@ -98,8 +98,6 @@ trait object 可以通过转化指针来获得，但这个指针指向的对象�
 ##[trait object 的表示](http://programmers.stackexchange.com/a/247313/79822)
 
 trait 的所有方法可以通过 trait object 里面一个 vtable 类型的指针来调用。（vtable 由编译器创建和管理）
-
-trait object 说简单也简单说复杂也复杂，他核心的数据结构和布局很直接，但是有一些很奇怪的出错信息和行为。
 
 我们从简单的 trait object 运行时表示开始，Rust 源代码的 `std::raw` 模块里包含了 trait object 的结构体：
 
@@ -126,7 +124,7 @@ vtable 是一个包含了若干个函数指针的结构体，这些函数指针�
 	fn call_method_on_u8(x: *const ()) -> String {
 	    // the compiler guarantees that this function is only called
 	    // with `x` pointing to a u8
-	    let byte: &u8 = unsafe { &*(x as *const u8) };
+	    let byte: &u8 = unsafe { &*(x as *const u8) };                                
 
 	    byte.method()
 	}
@@ -160,9 +158,10 @@ vtable 是一个包含了若干个函数指针的结构体，这些函数指针�
 	    method: call_method_on_String as fn(*const ()) -> String,
 	};
 
+其实这里的核心思想就是把函数调用替换成了函数指针，然后放到 vtable 里面，从而使得包含了 vtable 的 trait object 可以作为参数来控制最终调用函数的位置。
 vtable 里面的 destructor 字段指向一个函数，这个函数会清理掉 vtable 占用的资源，对 u8 来说这个字段为空，但 String 就需要它来释放内存。对占有类型的 trait object，比如 Box<Foo> 来说这个 destructor 把自身由 Box 分配的空间 和 trait object 里面占用的资源一同清理掉。size 和  align 字段保存了被擦除类型的大小和对齐要求；这两个字段目前还没有用，将来会用到。
 
-假设我们的一些类型实现了 Foo trait ，然后显示地构造和使用 trait object ：
+下面例举了编译器如何显示地构造和使用 trait object ：
 
 	let a: String = "foo".to_string();
 	let x: u8 = 1;
