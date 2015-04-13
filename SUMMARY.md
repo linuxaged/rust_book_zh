@@ -32,7 +32,7 @@
 	* [迭代器](intermediate/iterator.md)
 	* [模板](intermediate/generic.md)
 	* [Traits](intermediate/trait.md)
-	* [调度](intermediate/dispatch.md)
+	* [Trait Object](intermediate/traitobject.md)
 	* [宏](intermediate/macro.md)
 	* [并行](intermediate/concurrency.md)
 	* [错误处理](intermediate/error.md)
