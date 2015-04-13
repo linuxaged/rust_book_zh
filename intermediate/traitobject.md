@@ -1,8 +1,9 @@
-% Trait Objects
+Trait Objects
+===
 
 当涉及到多态的时候，有一种判断到底应该调用哪个版本的机制，这种机制叫做调度（dispatch）。有两种调度，静态调度和动态调度。Rust 更倾向于使用静态调度，但是也支持动态调度；动态调度是通过 trait objects 来实现的。
 
-#准备
+##准备
 
 为了后面讨论方便，我们先写一个 trait 的例子：
 
@@ -20,7 +21,7 @@
 	    fn method(&self) -> String { format!("string: {}", *self) }
 	}
 
-# 静态调度
+##静态调度
 
 我们可以通过 trait 绑定来实现静态调度：
 
@@ -58,7 +59,7 @@
 
 另外值得注意的是编译器并不完美，它可能把代码优化得变慢了。比如过多的使用内联函数会阻塞指令缓存（instruction cache），因此你应该小心使用`#[incline]` 和 `#[inline(always)]`。同样的原因，动态调度有可能比静态调度快。
 
-#动态调度
+##动态调度
 
 Rust 通过一种叫做 trait objects 的特性来实现动态调度。像 `&Foo` ，`Box<Foo>` 这样的 trait object 包含了一个实现了 Foo trait 的对象。这个对象的类型具体什么类型只有在运行时才知道。
 
