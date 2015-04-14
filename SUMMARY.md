@@ -33,6 +33,7 @@ Rust 编程语言
 	* [模板](intermediate/generic.md)
 	* [Trait](intermediate/trait.md)
 	* [Trait Object](intermediate/traitobject.md)
+	* [容器类型](intermediate/collections.md)
 	* [宏](intermediate/macro.md)
 	* [并行](intermediate/concurrency.md)
 	* [错误处理](intermediate/error.md)
