@@ -5,7 +5,7 @@ Rust 有两种方式表示循环：for 和 while.
 
 ##for
 
-for 用于固定次数的循环，Rust 的for循环和其他语言不太一样，不同于 C 语言的for循环：
+`for` 用于固定次数的循环，Rust 的 `for` 循环和其他语言不太一样，不同于 C 语言的for循环：
 
 	for (x=0; x < 10; x++) {
 		printf("%d\n", x );
@@ -33,7 +33,7 @@ Rust 故意不提供 c 风格的 for 循环，手动控制循环中的每个元�
 
 ##while
 
-另一种表示循环的方式是用 while:
+另一种表示循环的方式是用 `while`:
 
 	let mut x = 5u32;       // mut x: u32
 	let mut done = false; // mut done: bool
@@ -53,16 +53,16 @@ Rust 故意不提供 c 风格的 for 循环，手动控制循环中的每个元�
 	
 	loop {}
 	
-Rust 的流程控制分析区别对待 loop 和 while true，loop 会明确告诉编译器我会一直循环下去，利于编译器更好的生成代码并提高安全性。所以当你需要使用死循环的时候应当选用 loop
+Rust 的流程控制分析区别对待 `loop` 和 `while true`，`loop` 会明确告诉编译器我会一直循环下去，利于编译器更好的生成代码并提高安全性。所以当你需要使用死循环的时候应当选用 `loop`
 
 
 ##提前跳出迭代
 
-让我们来看一下之前提到的 while 循环：
+让我们来看一下之前提到的 `while` 循环：
 
 	let mut x = 5u32;
 	let mut done = false;
-	while !doen {
+	while !done {
 		x += x - 3;
 		println!("{}",x);
 		if x % 5 == 0 { done = true; }
