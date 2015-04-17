@@ -64,12 +64,12 @@ Crate 和 模块
 	    ├── libphrases-a7448e02a0468eaa.rlib
 	    └── native
 
-`src/lib.rs` 使我们的根 crate :
+`src/lib.rs` 是我们的*根 crate* :
 
 	mod english;
 	mod japanese;
 
-这两句告诉 Rust 去找 叫做 `src/english.rs` `src/japanese.rs` 或者 `src/english/mod.rs` `src/japanese/mod.rs` 的文件。这里我们有子 crate，所以是第二种。`src/english/mod.rs` `src/japanese/mod.rs` 是一样的：
+这两句告诉 Rust 去找 叫做 `src/english.rs` `src/japanese.rs` 或者 `src/english/mod.rs` `src/japanese/mod.rs` 的文件。这里我们有*子 crate*，所以是第二种。`src/english/mod.rs` `src/japanese/mod.rs` 是一样的：
 
 	mod greetings;
 	mod farewells;
