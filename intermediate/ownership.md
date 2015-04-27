@@ -1,7 +1,7 @@
 所有权系统
 ===
 
-这篇将讲述 Rust 的所有权（ownership）系统。这是 Rust 最为特殊和引人入胜的部分，也是 Rust 程序员必须要掌握的。Rust 是通过*所有权*来实现内存安全的。所有权系统分为几个部分：*所有权*, *借贷* 和 *生命周期*。我们会依次介绍。
+这篇将讲述 Rust 的所有权（ownership）系统。这是 Rust 最为特殊和引人入胜的部分，也是 Rust 程序员必须要掌握的。Rust 是通过*所有权*来实现内存安全的。所有权系统分为几个部分：*所有权*(ownership), *借贷*(borrow) 和 *生命周期*(lifetime)。我们会依次介绍。
 
 ##前言
 
@@ -9,13 +9,11 @@
 
 Rust 的最大卖点就是兼顾安全和速度，并且这两项是通过零代价的抽象来实现的。所有权系统是零代价抽象的主要例子。我们即将开始的所有讨论都是在编译时完成的，并没有任何运行时开销。
 
-说实话这个系统确实有一点代价：学习曲线陡峭。很多初学者都有一种和编译器作斗争的感觉，自己觉得明明能编译通过的程序却报错。这是由我们理解的所有权系统工作方式和实际的 Rust 实现有所不同引起了。有经验的 Rust 程序员指出随着用的越来越多，类似的问题也越来越少。
-
-记住这些我们就开始学习所有权系统。
+说实话这个系统确实有一点代价：学习曲线陡峭。很多初学者都有一种和编译器作斗争的感觉，自己觉得明明能编译通过的程序却报错。这是由我们理解的所有权系统工作方式和实际的 Rust 实现有所不同引起了。当然这类问题会随着你对 Rust 所有权系统的了解逐步减少。
 
 ##所有权
 
-所有权的核心是资源。资源有好多种（文件句柄等），方便起见这里我们只讨论最常用的一种资源：内存。
+所有权的核心是资源。资源有好多种（内存，硬盘上的文件等），方便起见这里我们只讨论最常用的一种资源：内存。
 
 使用任何不提供垃圾回收的语言，只要你从堆上申请了内存就要负担起以销毁它的责任。比如一个 foo 函数分配了 4 字节的内存，然后一直没有销毁。这就会引起内存泄露，每次我们调用 foo 都会分配 4 字节。一定次数的调用之后，程序就会吃光我们的内存。这很糟糕，所以我们要以某种方式回收这 4 字节内存，另外我们也不能多回收。多次回收也会导致问题，这里先不说为什么。总之任何时候我们申请了内存，我们要确保回收那片内存并且只回收一次。多一次不行，少一次也不行。分配的次数和回收的次数要对应。
 
@@ -166,11 +164,11 @@ Rust 的所有权系统于此类似，允许拥有者将资源临时的借给别
 最直观的理解生命周期的方法是把作用域内引用的生命周期画出来，例如：
 
     fn main() {
-        let y = &5;     // -+ y goes into scope
+        let y = &5;     // -+ y 的生命周期从这开始
                         //  |
-        // stuff        //  |
+        //do sth        //  |
                         //  |
-    }                   // -+ y goes out of scope
+    }                   // -+ y 的生命周期在这结束
 
 添加一个 Foo 方法：
 
@@ -179,13 +177,33 @@ Rust 的所有权系统于此类似，允许拥有者将资源临时的借给别
     }
 
     fn main() {
-        let y = &5;           // -+ y goes into scope
-        let f = Foo { x: y }; // -+ f goes into scope
-        // stuff              //  |
+        let y = &5;           // -+ y 的生命周期从这开始
+        let f = Foo { x: y }; // -+ f 的生命周期从这开始
+        //do sth              //  |
                               //  |
-    }                         // -+ f and y go out of scope
+    }                         // -+ f 和 y 的生命周期在这结束
 
+f 的生命周期包含在 y 的生命周期内，这儿没有问题；可是一旦把一个短生命周期的对象绑定到一个常生命周期的对象上问题就来了：
 
+	struct Foo<'a> {
+	    x: &'a i32,
+	}
+
+	fn main() {
+	    let x;                    // -+ x goes into scope
+	                              //  |
+	    {                         //  |
+	        let y = &5;           // ---+ y goes into scope
+	        let f = Foo { x: y }; // ---+ f goes into scope
+	        x = &f.x;             //  | | error here
+	    }                         // ---+ f and y go out of scope
+	                              //  |
+	    println!("{}", x);        //  |
+	}                             // -+ x goes out of scope
+
+这儿 x 的生命周期最长，f 的生命周期最短。但我们把 f 的一个成员绑定到了 x，这会导致 f 已经销毁了我们还在使用绑定到 x 的这个 f 的字段。
+
+我们可以给这些声明周期命名。
 ##'static
 
 有一种特殊的生命周期叫做 'static。它表示对象的生命周期是整个程序的运行时。我们第一次遇到 'static 是在使用字符串常量的时候：
@@ -196,3 +214,107 @@ Rust 的所有权系统于此类似，允许拥有者将资源临时的借给别
 
 	static FOO: i32 = 5;
 	let x: &'static i32 = &FOO;
+
+这会添加一个 i32 类型到程序的数据段上，x 是它的一个引用。
+
+#共享声明周期
+
+到目前为止我们都是举得一个资源只有一个所有者的例子。但有时这并不合理。不如车有四个轮子，我们要把四个轮子都赋给一辆车：
+
+	struct Car {
+	    name: String,
+	}
+
+	struct Wheel {
+	    size: i32,
+	    owner: Car,
+	}
+
+	fn main() {
+	    let car = Car { name: "DeLorean".to_string() };
+
+	    for _ in 0..4 {
+	        Wheel { size: 360, owner: car };
+	    }
+	}
+
+会报错：
+
+	error: use of moved value: `car`
+	    Wheel { size: 360, owner: car };
+	                              ^~~
+	note: `car` moved here because it has type `Car`, which is non-copyable
+	    Wheel { size: 360, owner: car };
+	                              ^~~
+
+这里我们需要 Car 能够被多个 Wheel 引用，Box<T> 不行因为它只能有一个持有者，这里我们要用 Rc<T>:
+
+	use std::rc::Rc;
+
+	struct Car {
+	    name: String,
+	}
+
+	struct Wheel {
+	    size: i32,
+	    owner: Rc<Car>,
+	}
+
+	fn main() {
+	    let car = Car { name: "DeLorean".to_string() };
+
+	    let car_owner = Rc::new(car);
+
+	    for _ in 0..4 {
+	        Wheel { size: 360, owner: car_owner.clone() };
+	    }
+	}
+
+这我们把 Car 放在了 Rc<T> 里面，得到一个 Rc<Car>,然后使用 clone() 方法来创建一个新的引用。
+
+这是最简单的多人持有的情况。当我们需要考虑到多线程时，要用 Arc<T> ，这个相对于 Rc<T> 它的引用计数是线程安全的。
+
+#生命周期的省略
+
+我们引入两个术语来讨论生命周期的省略，一个叫输入生命周期(input lifetime)，一个叫输出生命周期(output lifetime)。输入生命周期和函数的参数绑定，输出生命周期和函数返回值绑定。例如：
+
+	fn foo<'a>(bar: &'a str) // 有个输入生命周期
+
+	fn foo<'a>() -> &'a str // 有个输出生命周期
+
+	fn foo<'a>(bar: &'a str) -> &'a str // 输入输出生命周期都有
+
+这儿有三条规则：
+
+	* 编译器会把函数各个参数省略掉的生命周期变成不同的生命周期参数。
+	* 如果仅有一个输入生命周期，不管它省略与否，所有输出生命周期和这个输入生命周期保持一致。
+	* 如果有多个输入生命周期，其中有一个是 `&self` 或者 `&mut self`，那么所有省略掉的输出生命周期都被设成和 self 一致。
+
+#例子
+
+	fn print(s: &str); // 省略形式
+	fn print<'a>(s: &'a str); // 完整形式
+
+	fn debug(lvl: u32, s: &str); // 省略形式
+	fn debug<'a>(lvl: u32, s: &'a str); // 完整形式
+
+	// In the preceding example, `lvl` doesn't need a lifetime because it's not a
+	// reference (`&`). Only things relating to references (such as a `struct`
+	// which contains a reference) need lifetimes.
+
+	fn substr(s: &str, until: u32) -> &str; // 省略形式
+	fn substr<'a>(s: &'a str, until: u32) -> &'a str; // 完整形式
+
+	fn get_str() -> &str; // ILLEGAL, no inputs
+
+	fn frob(s: &str, t: &str) -> &str; // ILLEGAL, two inputs
+	fn frob<'a, 'b>(s: &'a str, t: &'b str) -> &str; // 完整形式: Output lifetime is unclear
+
+	fn get_mut(&mut self) -> &mut T; // 省略形式
+	fn get_mut<'a>(&'a mut self) -> &'a mut T; // 完整形式
+
+	fn args<T:ToCStr>(&mut self, args: &[T]) -> &mut Command // 省略形式
+	fn args<'a, 'b, T:ToCStr>(&'a mut self, args: &'b [T]) -> &'a mut Command // 完整形式
+
+	fn new(buf: &mut [u8]) -> BufWriter; // 省略形式
+	fn new<'a>(buf: &'a mut [u8]) -> BufWriter<'a> // 完整形式
