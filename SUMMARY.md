@@ -5,7 +5,8 @@ Rust 编程语言
 
 《Rust 编程语言》分为以下几个部分
 
-* [简介](SUMMARY.md)
+* [目录](SUMMARY.md)
+* [介绍](introduction.md)
 * [基础](basic/README.md)
     * [安装](basic/install.md)
     * [Hello, World!](basic/helloword.md)
