@@ -1,3 +1,6 @@
+复合数据类型
+===
+
 和其他语言一样 Rust 提供了非常多的内置类型。我们已经学习整型、字符串类型的一些简单用法，现在讨论复杂一点的数据表示方式。
 
 ##tuples
@@ -53,9 +56,35 @@ struct 是比 tuple 更常见更通用的类型，他们的区别在于 struct �
 	struct Color(i32, i32, i32);
 	let black = Color(255,255,255); // struct
 
-
-
 这里 black != origin
+
+##成员初始化
+
+为了避免每次绑定 struct 的时候都要对各个成员进行赋值来进行初始化，我们可以替 struct 实现 Default trait，然后通过调用 Default::default()  来进行初始化：
+
+	use std::default::Default;
+
+	struct Color {
+	    r: i32,
+	    g: i32,
+	    b: i32,
+	    a: i32,
+	}
+
+	impl Default for Color {
+	    fn default() -> Color {
+	        Color{r: 255, g: 255, b: 255, a: 255}
+	    }
+	}
+
+	fn main() {
+	    // 绑定一个默认值
+	    let black = Color::default();
+	    println!("color:{},{},{},{}", color.r, color.g, color.b, color.a);
+	    // 把 r 设为 128，其余为默认
+	    let color = Color{r: 128, ..Default::default()};
+	    println!("color:{},{},{},{}", color.r, color.g, color.b, color.a);
+	}
 
 #tuple struct
 

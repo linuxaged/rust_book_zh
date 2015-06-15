@@ -1,4 +1,5 @@
-#[《Rust 编程语言》](SUMMARY.md)
+[《Rust 编程语言》](SUMMARY.md)
+===
 
 ##安装 gitbook
 

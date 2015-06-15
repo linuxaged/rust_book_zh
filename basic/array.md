@@ -1,4 +1,5 @@
-#数组，Vector 和 切片
+数组，Vector 和 切片
+===
 
 ##数组
 
@@ -6,11 +7,11 @@
 
 	let a = [1, 2, 3]; // 不可改写里面的成员
 	let mut m = [1, 2, 3]; // 可改写里面的成员
-	
+
 相比于其他语言，在 Rust 里把数组初始化成特定的值要简单得多：
 
 	let a = [0; 20]; // 初始值和大小用分号隔开
-	
+
 在 Rust 里数组是一个 `[T; N]` 类型。T 表示元素类型，N 表示元素个数。
 
 你可以用 `.len()` 方法来获取元素个数，用 `.iteor()` 方法来循环迭代数组里每个元素。举例，依次打印每个元素：
@@ -21,12 +22,12 @@
 	for e in a.iter() {
 	    println!("{}", e);
 	}
-	
+
 你可以用下标获取特定位置的元素：
 
 	let names = ["Graydon", "Brian", "Niko"]; // names: [&str; 3]
 	println!("The second name is: {}", names[1]);
-	
+
 和大多数其他编程语言一样，Rust 数组的下标也从 `0` 开始。因此第一个元素是 `names[0]` 第二个是 `names[1]`。例子中将打印 `Brian`。如果你的下标越界了，会返回一个错误：“array access is bounds-checked at run-time”。数组越界在其他编程语言里是很多问题的根源。
 
 ##Vector
@@ -34,7 +35,7 @@
 vector 是动态的或者说大小可变的数组，是一个标准库类型： `Vec<T>`。vector 相对于数组好比 `String` 相对于 `&str`。你可以用 `vec!` 宏创建 vector。
 
 	let v = vec![1, 2, 3]; // v: Vec<i32>
-	
+
 如果想把所有成员初始化一样的值：
 
 	let v = vec![0; 20]; // 20 个成员全初始化为 0
@@ -44,7 +45,7 @@ vector 是动态的或者说大小可变的数组，是一个标准库类型： 
 	let mut nums = vec![1, 2, 3]; // mut nums: Vec<i32>
 	nums.push(4);
 	println!("The length of nums is now {}", nums.len()); // Prints 4
-	
+
 vector 还内置了非常多有用的方法。这个你可以查询[标准库手册](http://doc.rust-lang.org/std/)。
 
 ##切片
