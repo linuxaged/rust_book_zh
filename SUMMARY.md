@@ -6,7 +6,11 @@ Rust 编程语言
 《Rust 编程语言》分为八章，第一章就是这篇介绍，其余七章分别是：
 
 * [准备](getting_started/README.md) 配置好 Rust 开发环境
+	* [Hello, World!](getting_started/helloworld.md)
+	* [Hello, Cargo!](getting_started/cargo.md)
 * [先睹为快](learn_rust/README.md) 通过几个例子体验 Rust 是如何犀利地解决一些问题的
+	* [哲学家就餐](learn_rust/dining.md)
+	* [猜谜游戏](learn_rust/guessgame.md)
 * [Effective Rust](effective_rust/README.md) 如何写出高效的 Rust 代码
 * [语法和语义](syntax_sematic/README.md) 讲述 Rust 的每个细节
 * [Nightly Rust](nightly_rust/README.md) 最新的特性
