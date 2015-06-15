@@ -121,3 +121,15 @@ scoped 有一个有意思的类型符号：
 
 我们用 mpsc::channel() 方法创建了一个管道，在一端发送 `()` 然后另一端等待接收。
 
+#Panics
+
+当前线程执行过程中崩溃会返回一个 `panic!`，你可以利用这个把线程和其他代码隔离开来：
+
+	use std::thread;
+
+	let result = thread::spawn(move || {
+	    panic!("oops!");
+	}).join();
+
+	assert!(result.is_err());
+
