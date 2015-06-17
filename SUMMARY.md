@@ -5,15 +5,15 @@ Rust 编程语言
 
 《Rust 编程语言》分为八章，第一章就是这篇介绍，其余七章分别是：
 
-* [准备](getting_started/README.md) 配置好 Rust 开发环境
+* [准备](getting_started/README.md)
     * [猜谜游戏](guessgame.md)
 	* [Hello, World!](getting_started/helloworld.md)
 	* [Hello, Cargo!](getting_started/cargo.md)
-* [先睹为快](learn_rust/README.md) 通过几个例子体验 Rust 是如何犀利地解决一些问题的
+* [先睹为快](learn_rust/README.md)
 	* [猜谜游戏](learn_rust/guessgame.md)
     * [哲学家就餐](learn_rust/dining.md)
 	* [在其他语言里调用 Rust](learn_rust/ffi.md)
-* [Effective Rust](effective_rust/README.md) 如何写出高效的 Rust 代码
+* [Effective Rust](effective_rust/README.md)
     * [堆和栈](effective_rust/stackheap.md)
     * [测试](effective_rust/test.md)
     * [条件编译](effective_rust/conditianalcompilation.md)
@@ -24,7 +24,7 @@ Rust 编程语言
     * [FFI](effective_rust/ffi.md)
     * [Borrow 和 AsRef](effective_rust/borrow.md)
     * [Release 频道](effective_rust/release.md)
-* [语法和语义](syntax_sematic/README.md) 讲述 Rust 的每个细节
+* [语法和语义](syntax_sematic/README.md)
     * [值绑定](syntax_sematic/binding.md)
     * [函数](syntax_sematic/function.md)
     * [基本类型](syntax_sematic/basic.md)
@@ -46,12 +46,12 @@ Rust 编程语言
     * [Trait](syntax_sematic/trait.md)
     * [Drop](syntax_sematic/drop.md)
     * [if let](syntax_sematic/)
-    * [Trait Object](syntax_sematic/)
+    * [Trait Object](syntax_sematic/traitobject.md)
     * [闭包](syntax_sematic/closure.md)
-    * [Deref coercions](syntax_sematic/)
+    * [Deref coercions](syntax_sematic/deref.md)
     * [宏](syntax_sematic/macro.md)
     * [裸指针](syntax_sematic/pointer.md)
     * [unsafe](syntax_sematic/unsafe.md)
-* [Nightly Rust](nightly_rust/README.md) 最新的特性
+* [Nightly Rust](nightly_rust/README.md)
 * [术语表](glossary/glossary.md) 专有名词
 * [学术研究](academic_research/README.md)
