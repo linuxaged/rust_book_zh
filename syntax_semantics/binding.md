@@ -70,3 +70,8 @@ Rust 是一门静态类型语言，也就是说在赋值前要明确值的类型
 	error: aborting due to previous error
 	Could not compile `hello_world`.
 	
+Rust 是不允许使用未经初始化的值的。另外我们在解释一下 `println!` 宏的用法。
+
+第一个参数是一个字符串，里面还有一对大括号，这对大括号叫做 String Interpolation。它的作用相当于一个标记，就是告诉编译器我这有个位置你帮我填充一个值。这个要填充的值就是第二个参数，和第一个参数之间用逗号隔开。
+
+Rust 可以打印[多种值](https://doc.rust-lang.org/nightly/std/fmt/) 目前我们只是打印最简单的整型。
