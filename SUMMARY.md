@@ -49,7 +49,7 @@ Rust 编程语言
     * [Trait Object](syntax_sematic/traitobject.md)
     * [闭包](syntax_sematic/closure.md)
     * [Crate 和模块](syntax_sematic/module.md)
-    * [const 和 static](syntax_sematic/constaic.md)
+    * [const 和 static](syntax_sematic/constatic.md)
     * [属性](syntax_sematic/attribute.md)
     * [类型别称](syntax_sematic/aliase.md)
     * [强制转换](syntax_sematic/cast.md)
