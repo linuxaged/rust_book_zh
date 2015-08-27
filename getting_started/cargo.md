@@ -3,7 +3,7 @@ Cargo
 
 Cargo 负责三件事：下载你代码中的依赖；编译这些依赖；最后编译你的代码。
 
-如果你是通过官方的安装器来安装的 Rust ，那么同时你会安装好 Cargo。如果你用别的方法安装的请参考 Cargo 的 README 来安装。
+如果你是通过官方的安装器来安装的 Rust ，那么同时你会安装好 Cargo。如果你用别的方法安装的请参考 Cargo 的 [README](https://github.com/rust-lang/cargo/blob/master/README.md) 来安装。
 
 我们来把我们的 Hello World 程序转化成 Cargo 工程。
 
